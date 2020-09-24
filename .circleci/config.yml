@@ -1,0 +1,44 @@
+version: 2.1
+executors:
+    my-executor:
+      docker:
+        - image: circleci/node:10.15.3
+jobs:
+    test:
+        executor: my-executor
+        steps:
+            - checkout
+            - run:
+                name: update-npm
+                command: "sudo npm install -g npm@latest"
+            -  restore_cache:
+                key: dependency-cache-{{ checksum "package.jsn" }}
+            - run:
+                name: install-npm-wee
+                command: npm install
+            - save_cache:
+                key: dependency-cache-{{ checksum "package.jsn" }}
+                paths:
+                    - ./node_modules
+            - run:
+                name: test
+                command: npm run test
+            - store_artifacts:
+                path: test-results.xml
+                prefix: tests
+            - store_artifacts:
+                path: coverage
+                prefix: coverage
+            - store_test_results:
+                path: test-results.xml
+    build:
+        executor: my-executor
+        steps:
+            - checkout
+            - run:
+                name: "Build Application"
+                command: npm run production
+workflows:
+    test_and_build:
+        jobs:
+            - test
