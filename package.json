@@ -1,0 +1,22 @@
+{
+  "name": "circleci-demo-mathjs",
+  "version": "1.0.0",
+  "description": "Simple demo integration with circle ci",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgflores/circleci-demo-mathjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sgflores/circleci-demo-mathjs/issues"
+  },
+  "homepage": "https://github.com/sgflores/circleci-demo-mathjs#readme",
+  "devDependencies": {
+    "jest": "^26.4.2"
+  }
+}
