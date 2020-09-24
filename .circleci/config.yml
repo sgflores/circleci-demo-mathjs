@@ -5,6 +5,7 @@ executors:
         - image: circleci/node:10.15.3
 jobs:
     test:
+        working_directory: ~/public
         executor: my-executor
         steps:
             - checkout
@@ -12,12 +13,12 @@ jobs:
                 name: update-npm
                 command: "sudo npm install -g npm@latest"
             -  restore_cache:
-                key: dependency-cache-{{ checksum "package.jsn" }}
+                key: dependency-cache-{{ checksum "package.json" }}
             - run:
                 name: install-npm-wee
                 command: npm install
             - save_cache:
-                key: dependency-cache-{{ checksum "package.jsn" }}
+                key: dependency-cache-{{ checksum "package.json" }}
                 paths:
                     - ./node_modules
             - run:
